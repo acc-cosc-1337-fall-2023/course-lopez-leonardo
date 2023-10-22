@@ -27,7 +27,7 @@ int main()
 			game.display_board();
 		}
 
-		cout<<"Play again, enter y or Y? ";
+		cout<<"Enter y to play again, enter anything else to exit:  ";
 		cin>>user_choice;
 
 	}while(user_choice == 'y'|| user_choice == 'Y');

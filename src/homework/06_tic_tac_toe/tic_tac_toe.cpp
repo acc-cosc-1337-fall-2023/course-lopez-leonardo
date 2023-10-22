@@ -4,7 +4,20 @@
 
 bool TicTacToe::game_over()
 {
-    return check_board_full();
+    if(TicTacToe::check_column_win() || TicTacToe::check_row_win() || TicTacToe::check_diagonal_win())
+    {
+        set_winner(TicTacToe:: player);
+        std::cout<<"Winner is: "<<get_winner()<<"\n";
+        return true;
+    }
+    if(TicTacToe::check_board_full())
+    {
+        set_winner("C");
+        std::cout<<"Winner is: "<<get_winner()<<"\n";
+        return true;
+    }
+    return false;
+    
 }
 
 void TicTacToe::start_game(std::string first_player)
@@ -16,7 +29,10 @@ void TicTacToe::start_game(std::string first_player)
 void TicTacToe::mark_board(int position)
 {
     pegs[position -1] = player;
-    set_next_player();
+    if(!game_over())
+    {
+        set_next_player();
+    }
 }
 
 void TicTacToe::display_board() const
@@ -25,6 +41,11 @@ void TicTacToe::display_board() const
     {
         std::cout<<pegs[i]<<"|"<<pegs[i+1]<<"|"<<pegs[i+2]<<"\n";
     }
+}
+
+std::string TicTacToe::get_winner()
+{
+    return winner;
 }
 
 //private functions
@@ -40,7 +61,7 @@ void TicTacToe::set_next_player()
 {
     if(player == "X")
     {
-        player = "Y";
+        player = "O";
     }else
     {
         player = "X";
@@ -57,4 +78,56 @@ bool TicTacToe::check_board_full()
         }
     }
     return true;
+}
+
+void TicTacToe::set_winner(std::string play)
+{
+    winner = play;
+}
+
+bool TicTacToe::check_column_win()
+{
+    if(player == pegs[0] && player == pegs[3] && player == pegs[6])
+    {
+        return true;
+    }
+    if(player == pegs[1] && player == pegs[4] && player == pegs[7])
+    {
+        return true;
+    }
+    if(player == pegs[2] && player == pegs[5] && player == pegs[8])
+    {
+        return true;
+    }
+    return false;
+}
+
+bool TicTacToe::check_row_win()
+{
+    if(player == pegs[0] && player == pegs[1] && player == pegs[2])
+    {
+        return true;
+    }
+    if(player == pegs[3] && player == pegs[4] && player == pegs[5])
+    {
+        return true;
+    }
+    if(player == pegs[6] && player == pegs[7] && player == pegs[8])
+    {
+        return true;
+    }
+    return false;
+}
+
+bool TicTacToe::check_diagonal_win()
+{
+    if(player == pegs[0] && player == pegs[4] && player == pegs[8])
+    {
+        return true;
+    }
+    if(player == pegs[2] && player == pegs[4] && player == pegs[6])
+    {
+        return true;
+    }
+    return false;
 }

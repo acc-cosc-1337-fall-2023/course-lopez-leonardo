@@ -30,3 +30,52 @@ TEST_CASE("Test if the board is full")
 
 	REQUIRE(game.game_over()== true);
 }
+
+TEST_CASE("Verify first column win")
+{
+	TicTacToe game;
+	game.mark_board(1);
+	REQUIRE(game.game_over() == false);
+	game.mark_board(2);
+	REQUIRE(game.game_over() == false);
+	game.mark_board(4);
+	REQUIRE(game.game_over() == false);
+	game.mark_board(3);
+	REQUIRE(game.game_over() == false);
+	game.mark_board(7);
+
+	REQUIRE(game.game_over() == true);
+}
+
+TEST_CASE("Verify second column win")
+{
+	TicTacToe game;
+	game.mark_board(2);
+	REQUIRE(game.game_over() == false);
+	game.mark_board(3);
+	REQUIRE(game.game_over() == false);
+	game.mark_board(5);
+	REQUIRE(game.game_over() == false);
+	game.mark_board(4);
+	REQUIRE(game.game_over() == false);
+	game.mark_board(8);
+
+	REQUIRE(game.game_over() == true);
+}
+
+TEST_CASE("Verify third column win")
+{
+	TicTacToe game;
+	game.mark_board(3);
+	REQUIRE(game.game_over() == false);
+	game.mark_board(4);
+	REQUIRE(game.game_over() == false);
+	game.mark_board(6);
+	REQUIRE(game.game_over() == false);
+	game.mark_board(5);
+	REQUIRE(game.game_over() == false);
+	game.mark_board(9);
+
+	REQUIRE(game.game_over() == true);
+	/*Don't know why it my main runs perfectly in terms of game over situations but this comes out false */
+}
