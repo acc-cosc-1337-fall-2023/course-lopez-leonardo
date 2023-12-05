@@ -2,10 +2,10 @@
 #include "tic_tac_toe_manager.h"
 using std::cout;
 
-void TicTacToeManager::save_game(TicTacToe b)
+void TicTacToeManager::save_game(unique_ptr<TicTacToe>& b)
 {
-    games.push_back(b);
-    update_winner_count(b.get_winner());
+    update_winner_count(b -> get_winner());
+    games.push_back(std::move(b));
 }   
 
 void TicTacToeManager::get_winner_total()
@@ -19,7 +19,7 @@ void TicTacToeManager::display_all_games()
 {
     for(long unsigned int i = 0; i<games.size(); i++)
     {
-        games[i].display_board();
+        games[i] -> display_board();
         cout<<"\n";
     }
     get_winner_total();
